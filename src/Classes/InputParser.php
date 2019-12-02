@@ -12,4 +12,15 @@ class InputParser
             }
         );
     }
+
+    public function listToArray(string $input)
+    {
+        $values = explode(',', $input);
+        return array_map(
+            function (string $number) {
+                return (int) $number;
+            },
+            $values
+        );
+    }
 }
