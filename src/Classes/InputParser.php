@@ -13,14 +13,27 @@ class InputParser
         );
     }
 
-    public function listToArray(string $input)
+    public function listToArray(string $input, bool $parseToInt = true)
     {
         $values = explode(',', $input);
         return array_map(
-            function (string $number) {
-                return (int) $number;
+            function (string $value) use ($parseToInt) {
+                if ($parseToInt) {
+                    return (int) $value;
+                }
+                return $value;
             },
             $values
+        );
+    }
+
+    public function listsToArrays(string $input): array
+    {
+        return array_map(
+            function ($line) {
+                return $this->listToArray($line, false);
+            },
+            explode(PHP_EOL, $input)
         );
     }
 }
