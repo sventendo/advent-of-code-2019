@@ -8,11 +8,6 @@ class Day4 extends Day
     /** @var BruteForce */
     protected $bruteForce;
 
-    public function __construct(InputParser $inputParser)
-    {
-        parent::__construct($inputParser);
-    }
-
     public function firstPuzzle($input): string
     {
         $this->parseInput($input);
@@ -29,8 +24,6 @@ class Day4 extends Day
 
         $this->bruteForce = new BruteForce($this->input[0], $this->input[1]);
         $candidates = $this->bruteForce->crack(true);
-
-        var_dump($candidates);
 
         return (string) \count($candidates);
     }
