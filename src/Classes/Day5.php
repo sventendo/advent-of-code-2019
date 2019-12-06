@@ -33,9 +33,4 @@ class Day5 extends Day
     {
         $this->input = $this->inputParser->listToArray($input, false);
     }
-
-    protected function totalSteps(string $crossing, array $coordinatesWireA, array $coordinatesWireB)
-    {
-        return array_search($crossing, $coordinatesWireA) + array_search($crossing, $coordinatesWireB);
-    }
 }
