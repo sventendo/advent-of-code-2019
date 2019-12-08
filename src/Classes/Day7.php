@@ -9,9 +9,6 @@ use Sventendo\AdventOfCode2019\Day7\Mutator;
 
 class Day7 extends Day
 {
-    /** @var OrbitCounter */
-    protected $orbitCounter;
-
     /** @var AmplifierChainOptimizer */
     protected $amplifierChainOptimizer;
 
