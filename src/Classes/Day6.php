@@ -1,7 +1,6 @@
 <?php
 namespace Sventendo\AdventOfCode2019;
 
-use Sventendo\AdventOfCode2019\Day5\IntcodeComputer;
 use Sventendo\AdventOfCode2019\Day6\OrbitCounter;
 
 class Day6 extends Day

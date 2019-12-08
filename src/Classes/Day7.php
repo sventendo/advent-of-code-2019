@@ -1,11 +1,7 @@
 <?php
 namespace Sventendo\AdventOfCode2019;
 
-use Sventendo\AdventOfCode2019\Day5\IntcodeComputer;
-use Sventendo\AdventOfCode2019\Day6\OrbitCounter;
-use Sventendo\AdventOfCode2019\Day7\AmplifierChain;
 use Sventendo\AdventOfCode2019\Day7\AmplifierChainOptimizer;
-use Sventendo\AdventOfCode2019\Day7\Mutator;
 
 class Day7 extends Day
 {
