@@ -3,7 +3,7 @@ namespace Sventendo\AdventOfCode2019\Tests\Unit;
 
 use Sventendo\AdventOfCode2019\Day7;
 
-class Day6Test extends TestCase
+class Day7Test extends TestCase
 {
     public function setUp()
     {
