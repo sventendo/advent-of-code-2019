@@ -13,8 +13,6 @@ class Hull
     {
         $this->initializePanel($position);
         $color = $this->panels[$position->getY()][$position->getX()];
-        print 'Color at panel ' . $position->__toString() . ' is ' . ($color === 0 ? 'black' : 'white') . PHP_EOL;
-
 
         return $color;
     }
@@ -53,6 +51,10 @@ class Hull
         );
         $upperBorder = min(array_keys($this->panels));
         $lowerBorder = max(array_keys($this->panels));
+
+        if ($lowerBorder - $upperBorder < 0 || $rightBorder - $leftBorder < 0) {
+            throw new \Exception('Borders make no sense.');
+        }
 
         $canvas = [ [] ];
         for ($y = 0; $y <= $lowerBorder - $upperBorder; $y++) {

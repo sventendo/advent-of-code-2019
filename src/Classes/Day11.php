@@ -17,14 +17,9 @@ class Day11 extends Day
         $intcodeComputer = new IntcodeComputer($this->input, [ '0' ]);
 
         $hull = new Hull();
-        $robot = new Robot(new Vector(0, 0), true);
-
-        $steps = 0;
-
-        $hull->print($robot) . PHP_EOL;
+        $robot = new Robot(new Vector(0, 0));
 
         while (true) {
-            print 'Robot at position: ' . $robot->getPosition()->__toString() . PHP_EOL;
             $response = $intcodeComputer->run(
                 function () use ($hull, $robot) {
                     return $hull->getColor($robot->getPosition());
@@ -54,17 +49,10 @@ class Day11 extends Day
             }
 
             if ($response->getStatusCode() === 99) {
-                $hull->print($robot);
                 return (string) $hull->countPanelsPainted();
             }
 
-//            $hull->printData();
-            $hull->print($robot);
-
-            $steps++;
-            if ($steps === 20) {
-                return '20 steps taken.';
-            }
+//            $hull->print($robot);
         }
     }
 
