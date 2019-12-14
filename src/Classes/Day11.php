@@ -42,8 +42,6 @@ class Day11 extends Day
                         $robot->turnRight();
                     }
                     $robot->move();
-                    print 'Robot at position: ' . $robot->getPosition()->__toString() . PHP_EOL;
-                    $intcodeComputer->addInput($hull->getColor($robot->getPosition()));
                     $robot->toggleMode();
                 }
             }

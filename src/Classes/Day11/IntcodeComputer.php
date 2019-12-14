@@ -128,7 +128,7 @@ class IntcodeComputer
     public function set(string $opcode, string $parameterA): void
     {
         $position = $this->getPosition($parameterA, $opcode[-3]);
-        $this->software[(int) $position] = (string) $this->getNextInput();
+        $this->software[(int) $position] = (string) ($this->inputCallback)();
     }
 
     public function get(string $opcode, string $parameterA): string
