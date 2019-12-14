@@ -97,4 +97,9 @@ class Vector implements \JsonSerializable
     {
         return [ $this->x, $this->y ];
     }
+
+    public function getStringValue()
+    {
+        return $this->y . '|' . $this->x;
+    }
 }
