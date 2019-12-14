@@ -1,66 +1,27 @@
-<?php
+<?php declare(strict_types = 1);
 namespace Sventendo\AdventOfCode2019;
 
-use Sventendo\AdventOfCode2019\Day11\Hull;
-use Sventendo\AdventOfCode2019\Day11\Robot;
-use Sventendo\AdventOfCode2019\Day11\IntcodeComputer;
+use Sventendo\AdventOfCode2019\Day11\PaintJob;
 
 class Day11 extends Day
 {
-    /** @var IntcodeComputer */
-    protected $intcodeComputer;
-
     public function firstPuzzle($input): string
     {
         $this->parseInput($input);
+        $paintJob = new PaintJob();
+        $paintJob->start($this->input, 0);
 
-        $intcodeComputer = new IntcodeComputer($this->input, [ '0' ]);
-
-        $hull = new Hull();
-        $robot = new Robot(new Vector(0, 0));
-
-        while (true) {
-            $response = $intcodeComputer->run(
-                function () use ($hull, $robot) {
-                    return $hull->getColor($robot->getPosition());
-                }
-            );
-            if ($response->getStatusCode() === 4) {
-                if (array_search($response->getValue(), [ '0', '1' ], true) === false) {
-                    throw new \Exception('Unexpected output: ' . $response->getValue());
-                }
-
-                if ($robot->getMode() === Robot::MODE_PAINT) {
-                    $hull->paint($robot->getPosition(), $response->getValue());
-                    $robot->toggleMode();
-                }
-
-                if ($robot->getMode() === Robot::MODE_TURN) {
-                    if ($response->getValue() === '0') {
-                        $robot->turnLeft();
-                    } else {
-                        $robot->turnRight();
-                    }
-                    $robot->move();
-                    $robot->toggleMode();
-                }
-            }
-
-            if ($response->getStatusCode() === 99) {
-                return (string) $hull->countPanelsPainted();
-            }
-
-//            $hull->print($robot);
-        }
+        return (string) $paintJob->countPanelsPointed();
     }
 
     public function secondPuzzle($input): string
     {
         $this->parseInput($input);
+        $paintJob = new PaintJob();
+        $paintJob->start($this->input, 1);
+        $paintJob->print();
 
-        $this->intcodeComputer = new IntcodeComputer($this->input, [ 2 ]);
-
-        return (string) $this->intcodeComputer->run()->getValue();
+        return (string) '';
     }
 
     protected function parseInput(string $input): void

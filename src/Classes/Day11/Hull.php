@@ -6,8 +6,13 @@ use Sventendo\AdventOfCode2019\Vector;
 class Hull
 {
     /** @var array[] */
-    protected $panels = [ [ 0 ] ];
+    protected $panels;
     protected $panelsPainted = [];
+
+    public function __construct(int $initialColor)
+    {
+        $this->panels = [ [ $initialColor ] ];
+    }
 
     public function getColor(Vector $position)
     {

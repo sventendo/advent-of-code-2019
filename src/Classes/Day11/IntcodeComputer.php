@@ -23,11 +23,7 @@ class IntcodeComputer
     /** @var int */
     private $pointer = 0;
     /** @var array */
-    private $inputs;
-    /** @var array */
     private $output = [];
-    /** @var int */
-    private $inputPointer = 0;
     /** @var int */
     private $relativeBase = 0;
     /** @var bool */
@@ -35,21 +31,15 @@ class IntcodeComputer
     /** @var \Closure */
     private $inputCallback;
 
-    public function __construct(array $software = [], array $inputs = [], bool $debug = false)
+    public function __construct(array $software, \Closure $inputCallback, bool $debug = false)
     {
         $this->software = $software;
-        $this->inputs = $inputs;
+        $this->inputCallback = $inputCallback;
         $this->debug = $debug;
     }
 
-    public function addInput(string $input)
+    public function run(): Response
     {
-        $this->inputs[] = $input;
-    }
-
-    public function run(\Closure $inputCallback): Response
-    {
-        $this->inputCallback = $inputCallback;
         for ($cycle = 0; $cycle < 1000000; $cycle++) {
             $instruction = $this->normalizeInstruction($this->software[$this->pointer]);
             $opcode = $this->getOpcode($instruction);
@@ -190,11 +180,6 @@ class IntcodeComputer
         return (int) substr(trim($instruction), -2);
     }
 
-    protected function getNextInput(): string
-    {
-        return (string) $this->inputs[$this->inputPointer++];
-    }
-
     private function normalizeInstruction(string $instruction): string
     {
         $instruction = (string) $instruction;
@@ -225,23 +210,16 @@ class IntcodeComputer
 
     private function getPosition(string $parameter, string $mode): int
     {
-        if ($mode === self::MODE_IMMEDIATE) {
-            return (int) $parameter;
-        }
-
-        if ($mode === self::MODE_POSITION) {
-
-            if ((int) $parameter < 0) {
-                throw new \Exception('Invalid memory address: ' . $parameter);
-            }
-
-            return (int) $parameter;
-        }
+        $position = (int) $parameter;
 
         if ($mode === self::MODE_RELATIVE) {
-            return (int) $parameter + $this->relativeBase;
+            $position += $this->relativeBase;
         }
 
-        throw new \Exception('Invalid parameter mode: ' . $mode);
+        if ($position < 0) {
+            throw new \Exception('Invalid memory address: ' . $position);
+        }
+
+        return $position;
     }
 }
