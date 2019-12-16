@@ -66,7 +66,7 @@ class IntcodeComputer
                     $output = $this->get($instruction, $this->software[$this->pointer + 1]);
                     $this->pointer += 2;
                     $this->output[] = $output;
-                    return new Response(Response::STATUS_CODE_OUTPUT, $output, $this->output);
+                    return new Response(Response::STATUS_CODE_OUTPUT, $output);
                     break;
                 case self::OPCODE_JUMP_IF_TRUE:
                     $this->jumpIfTrue($instruction, ...array_slice($this->software, $this->pointer + 1, 2));
@@ -88,7 +88,7 @@ class IntcodeComputer
                     break;
                 case self::OPCODE_EXIT:
                     $lastOutputValue = $this->output[\count($this->output) - 1];
-                    return new Response(Response::STATUS_CODE_HALT, $lastOutputValue, $this->output);
+                    return new Response(Response::STATUS_CODE_HALT, $lastOutputValue);
                     break;
                 default:
                     throw new \Exception('Invalid opcode: ' . $opcode);

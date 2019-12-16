@@ -11,11 +11,10 @@ class Response
     /** @var string */
     protected $value;
 
-    public function __construct(int $statusCode, string $value, array $output)
+    public function __construct(int $statusCode, string $value)
     {
         $this->statusCode = $statusCode;
         $this->value = $value;
-        $this->output = $output;
     }
 
     public function getStatusCode(): int
@@ -26,10 +25,5 @@ class Response
     public function getValue(): string
     {
         return $this->value;
-    }
-
-    public function getOutput(): array
-    {
-        return $this->output;
     }
 }
