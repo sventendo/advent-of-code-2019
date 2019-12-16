@@ -12,14 +12,6 @@ class VectorTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('[1,2]', json_encode($vector));
     }
 
-    public function testDotProduct()
-    {
-        $vectorA = new Vector(2, 2);
-        $vectorB = new Vector(0, 3);
-
-        $this->assertEquals(6, $vectorA->dotProduct($vectorB));
-    }
-
     /**
      * @dataProvider getAngleExamples
      */
