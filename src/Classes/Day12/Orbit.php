@@ -24,25 +24,6 @@ class Orbit
         }
     }
 
-    protected function applyGravityToAllPlanets(): void
-    {
-        foreach ($this->planets as $i => $planetFrom) {
-            foreach ($this->planets as $j => $planetTo) {
-                if ($i === $j) {
-                    continue;
-                }
-                $planetFrom->gravitateTowards($planetTo);
-            }
-        }
-    }
-
-    protected function applyVelocityToAllPlanets(): void
-    {
-        foreach ($this->planets as $planet) {
-            $planet->applyVelocity();
-        }
-    }
-
     public function getEnergy(): int
     {
         $energy = 0;
@@ -63,5 +44,24 @@ class Orbit
         }
 
         return $values;
+    }
+
+    protected function applyGravityToAllPlanets(): void
+    {
+        foreach ($this->planets as $i => $planetFrom) {
+            foreach ($this->planets as $j => $planetTo) {
+                if ($i === $j) {
+                    continue;
+                }
+                $planetFrom->gravitateTowards($planetTo);
+            }
+        }
+    }
+
+    protected function applyVelocityToAllPlanets(): void
+    {
+        foreach ($this->planets as $planet) {
+            $planet->applyVelocity();
+        }
     }
 }
