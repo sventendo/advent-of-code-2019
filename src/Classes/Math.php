@@ -9,7 +9,7 @@ class Math
         if ($a === 0 || $b === 0) {
             return 0;
         }
-        $r = ($a * $b) / $this->gcd($a, $b);
+        $r = ($a * $b) / self::gcd($a, $b);
 
         return abs($r);
     }
