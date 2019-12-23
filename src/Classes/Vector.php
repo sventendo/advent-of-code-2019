@@ -3,6 +3,11 @@ namespace Sventendo\AdventOfCode2019;
 
 class Vector implements \JsonSerializable
 {
+    public const DIRECTION_UP = 0;
+    public const DIRECTION_RIGHT = 1;
+    public const DIRECTION_DOWN = 2;
+    public const DIRECTION_LEFT = 3;
+
     /** @var int */
     protected $x;
     /** @var int */
@@ -86,6 +91,26 @@ class Vector implements \JsonSerializable
     public function left($steps = 1)
     {
         $this->x -= $steps;
+    }
+
+    public function move(int $direction): void
+    {
+        switch ($direction) {
+            case self::DIRECTION_UP:
+                $this->up();
+                break;
+            case self::DIRECTION_RIGHT:
+                $this->right();
+                break;
+            case self::DIRECTION_DOWN:
+                $this->down();
+                break;
+            case self::DIRECTION_LEFT:
+                $this->left();
+                break;
+            default:
+                break;
+        }
     }
 
     public function __toString()
