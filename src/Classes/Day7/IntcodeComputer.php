@@ -15,7 +15,6 @@ class IntcodeComputer
     private const OPCODE_LESS_THAN = 7;
     private const OPCODE_EQUALS = 8;
     private const OPCODE_EXIT = 99;
-    const C = 99;
     /** @var array */
     private $software;
     /** @var int */
